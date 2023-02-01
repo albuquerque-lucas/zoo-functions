@@ -1,7 +1,6 @@
 const data = require('../data/zoo_data');
 
 const getEmployeeByName = (employeeName) => {
-
   const employeesList = data.employees;
   const result1 = employeesList.find((individual) => individual.firstName === employeeName);
   const result2 = employeesList.find((individual) => individual.lastName === employeeName);
