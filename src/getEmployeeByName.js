@@ -7,7 +7,8 @@ const getEmployeeByName = (employeeName) => {
 
   if (result1) {
     return result1;
-  } if (result2) {
+  }
+  if (result2) {
     return result2;
   }
   return {};
