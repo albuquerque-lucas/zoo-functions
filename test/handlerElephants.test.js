@@ -15,4 +15,12 @@ describe('Testes da função HandlerElephants', () => {
   test('Testa o caso das médias das idades dos elefantes', () => {
     expect(handlerElephants('averageAge')).toBeCloseTo(10.5);
   });
+
+  test('Testa se caso a função não receba nenhum parâmetro, retorna undefined', () => {
+    expect(handlerElephants()).toBe(undefined);
+  });
+
+  test('Testa se caso o valor passado como parâmetro não seja string, retorna uma mensagem de erro', () => {
+    expect(handlerElephants(1)).toBe('Parâmetro inválido, é necessário uma string');
+  });
 });
