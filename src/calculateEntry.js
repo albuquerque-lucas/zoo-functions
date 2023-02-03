@@ -11,15 +11,26 @@ const testEntrants = [
 
 const countEntrants = (entrants) => {
   const childrenCount = entrants.filter((item) => item.age < 18).length;
-	const adultCount = entrants.filter((item) => item.age >= 18 && item.age < 50).length;
-	const seniorCount = entrants.filter((item) => item.age >= 50).length;
+  const adultCount = entrants.filter((item) => item.age >= 18 && item.age < 50).length;
+  const seniorCount = entrants.filter((item) => item.age >= 50).length;
   return { child: childrenCount, adult: adultCount, senior: seniorCount };
 };
 
 const calculateEntry = (entrants) => {
-  // seu código aqui
+  if (entrants === undefined) return 0;
+  if (Object.keys(entrants).length === 0) return 0;
+
+  const passValues = data.prices;
+  const zooEntrants = countEntrants(entrants);
+  const childrenSum = zooEntrants.child * passValues.child;
+  const adultSum = zooEntrants.adult * passValues.adult;
+  const seniorSum = zooEntrants.senior * passValues.senior;
+  const total = childrenSum + adultSum + seniorSum;
+  return total;
 };
 
-console.log(countEntrants(testEntrants));
+console.log(calculateEntry(testEntrants));
+console.log(calculateEntry({}));
+console.log(calculateEntry());
 
 module.exports = { calculateEntry, countEntrants };
