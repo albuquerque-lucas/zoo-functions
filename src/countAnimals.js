@@ -31,19 +31,3 @@ const countAnimals = (animal) => {
 console.log(countAnimals({ species: 'bears', sex: 'female' }));
 
 module.exports = countAnimals;
-
-// const animalNameList = { ...animals.map((item) => item.name) };
-// const revertedArray = Object.entries(animalNameList).map(([key, value]) => [value, key]);
-// const inverseNameList = Object.fromEntries(revertedArray);
-// const inversedKeys = Object.keys(inverseNameList);
-// const animalCountingList = animals.map((item) => item.residents.length);
-// for (let i = 0; i < animalCountingList.length; i += 1) {
-//   let obj = {
-//     [inversedKeys[i]]: animalCountingList[i],
-//   };
-// }
-// let i = 0;
-// for (const key in inverseNameList) {
-//   inverseNameList[key] = animalCountingList[i];
-//   i += 1;
-// }
