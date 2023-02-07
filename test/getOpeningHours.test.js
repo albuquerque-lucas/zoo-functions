@@ -19,4 +19,16 @@ describe('Testes da função getOpeningHours', () => {
   test('Deve retornar que o zoológico está aberto, caso seja passado um dia e horário válido', () => {
     expect(getOpeningHours('Tuesday', '09:00-AM')).toBe('The zoo is open');
   });
+  test('Deve retornar um erro caso o parâmetro passado referente ao dia nãoseja válido', () => {
+    expect(() => getOpeningHours('Thu', '09:00-AM')).toThrow('The day must be valid. Example: Monday');
+  });
+  test('Deve retornar um erro caso a abreviatura do período do dia não seja válida', () => {
+    expect(() => getOpeningHours('Friday', '09:00-ZM')).toThrow('The abbreviation must be \'AM\' or \'PM\'');
+  });
+  test('Caso o parâmetro passado como horário no campo de horas não seja um número válido, deve retornar um erro', () => {
+    expect(() => getOpeningHours('Saturday', 'C9:00-AM')).toThrow('The hour should represent a number');
+  });
+  test('Caso o parâmetro passado como horário no campo de minutos não seja um número válido, deve retornar um erro', () => {
+    expect(() => getOpeningHours('Saturday', '09:c0-AM')).toThrow('The minutes should represent a number');
+  });
 });
