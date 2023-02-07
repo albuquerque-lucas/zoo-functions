@@ -13,4 +13,10 @@ describe('Testes da função getOpeningHours', () => {
     };
     expect(getOpeningHours()).toEqual(hoursObjs);
   });
+  test('A função deve retornar que o zoológico está fechado, seja passado um horário de Monday', () => {
+    expect(getOpeningHours('Monday', '09:00-AM')).toBe('The zoo is closed');
+  });
+  test('Deve retornar que o zoológico está aberto, caso seja passado um dia e horário válido', () => {
+    expect(getOpeningHours('Tuesday', '09:00-AM')).toBe('The zoo is open');
+  });
 });
