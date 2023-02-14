@@ -129,16 +129,4 @@ const getAnimalMap = (options) => {
   return conditions(options);
 };
 
-const testOptions = {
-  includeNames: true,
-  sex: 'female',
-  sorted: true,
-};
-
-// console.log(getAnimalMap(testOptions));
-// console.dir(getAllNames(), { depth: null });
-console.dir(getAnimalMap(testOptions), { depth: null });
-
-// console.dir(getAnimalMap(testOptions), { depth: null });
-
 module.exports = getAnimalMap;
