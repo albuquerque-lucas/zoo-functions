@@ -1,11 +1,5 @@
 const data = require('../data/zoo_data');
 
-// const exampleObj = {
-//   includeNames: true,
-//   sorted: true,
-//   sex: 'male',
-// };
-
 const returnObj = {
   NE: [],
   NW: [],
@@ -29,12 +23,6 @@ const getAllAnimalsByLocation = () => {
   returnObj.NW = getAnimalSpeciesByLocation('NW');
   returnObj.SE = getAnimalSpeciesByLocation('SE');
   returnObj.SW = getAnimalSpeciesByLocation('SW');
-  // const returnObj = {
-  //   NE: getAnimalSpeciesByLocation('NE'),
-  //   NW: getAnimalSpeciesByLocation('NW'),
-  //   SE: getAnimalSpeciesByLocation('SE'),
-  //   SW: getAnimalSpeciesByLocation('SW'),
-  // };
   return returnObj;
 };
 
@@ -78,38 +66,36 @@ const getAllSorted = () => {
   return returnObj;
 };
 
-// const getResidentNames = (location) => {
-//   const resultList = [];
-//   const animals = filterAnimals(location, 'name');
-//   animals.forEach((item) => {
-//     const resultObj = {};
-//     const residentList = data.species
-//       .filter((element) => element.name === item)
-//       .map((subElement) => subElement.residents)[0]
-//       .map((final) => final.name);
-//     resultObj[item] = residentList;
-//     resultList.push(resultObj);
-//   });
-//   return resultList;
-// };
+const filterBySex = (location, selectedSex) => {
+  const teste1 = getAnimalSpeciesByLocation(location);
+  const finalObj = {};
+  teste1.forEach((item) => {
+    const currentSpecieResidents = data.species.find((element) => element.name === item).residents
+      .filter((subElement) => subElement.sex === selectedSex);
+    const final = currentSpecieResidents.map((element) => element.name);
+    finalObj[item] = final;
+  });
+  const result = Object.entries(finalObj).map(([key, value]) => ({ [key]: value }));
 
-// const getAllResidentNames = () => {
-//   const returnObj = {
-//     NE: getResidentNames('NE'),
-//     NW: getResidentNames('NW'),
-//     SE: getResidentNames('SE'),
-//     SW: getResidentNames('SW'),
-//   };
-//   return returnObj;
-// };
+  return result;
+};
+
+const allAnimalsBySex = (selectedSex) => {
+  returnObj.NE = filterBySex('NE', selectedSex);
+  returnObj.NW = filterBySex('NW', selectedSex);
+  returnObj.SE = filterBySex('SE', selectedSex);
+  returnObj.SW = filterBySex('SW', selectedSex);
+
+  return returnObj;
+};
 
 const conditions = (options) => {
-// if (options.sex) {
-//   if (options.sorted === true) {
-//     return sortedNameAndSex();
-//   }
-//   return animalSexFiltered();
-// }
+  if (options.sex) {
+    // if (options.sorted === true) {
+    //   return sortedNameAndSex();
+    // }
+    return allAnimalsBySex(options.sex);
+  }
 
   if (options.sorted === true && options.sorted !== undefined) {
     return getAllSorted();
@@ -127,10 +113,13 @@ const getAnimalMap = (options) => {
 
 const testOptions = {
   includeNames: true,
+  sex: 'female',
 };
 
 // console.log(getAnimalMap(testOptions));
 // console.dir(getAllNames(), { depth: null });
-console.dir(getAnimalMap(testOptions), { depth: null });
+console.dir(getAnimalMap({ includeNames: true, sex: 'female' }), { depth: null });
+
+// console.dir(getAnimalMap(testOptions), { depth: null });
 
 module.exports = getAnimalMap;
