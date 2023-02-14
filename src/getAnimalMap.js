@@ -89,11 +89,29 @@ const allAnimalsBySex = (selectedSex) => {
   return returnObj;
 };
 
+const getSortedBySex = (location, selectedSex) => {
+  const currentAnimal = filterBySex(location, selectedSex);
+  currentAnimal.forEach((item) => {
+    const values = Object.values(item);
+    values[0].sort();
+  });
+  return currentAnimal;
+};
+
+const sortedNameAndSex = (selectedSex) => {
+  returnObj.NE = getSortedBySex('NE', selectedSex);
+  returnObj.NW = getSortedBySex('NW', selectedSex);
+  returnObj.SE = getSortedBySex('SE', selectedSex);
+  returnObj.SW = getSortedBySex('SW', selectedSex);
+
+  return returnObj;
+};
+
 const conditions = (options) => {
   if (options.sex) {
-    // if (options.sorted === true) {
-    //   return sortedNameAndSex();
-    // }
+    if (options.sorted === true) {
+      return sortedNameAndSex(options.sex);
+    }
     return allAnimalsBySex(options.sex);
   }
 
@@ -114,11 +132,12 @@ const getAnimalMap = (options) => {
 const testOptions = {
   includeNames: true,
   sex: 'female',
+  sorted: true,
 };
 
 // console.log(getAnimalMap(testOptions));
 // console.dir(getAllNames(), { depth: null });
-console.dir(getAnimalMap({ includeNames: true, sex: 'female' }), { depth: null });
+console.dir(getAnimalMap(testOptions), { depth: null });
 
 // console.dir(getAnimalMap(testOptions), { depth: null });
 
